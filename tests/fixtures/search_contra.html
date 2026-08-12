@@ -1,0 +1,60 @@
+<!-- Trimmed from a live GET /search?search_term_string=contra (2026-08-12).
+     Kept: the results table's real nesting (three responsive <td> variants
+     per row, repeated <a href>, <img> inside the anchor) and the real
+     pagination markup. Dropped: site chrome, ads, analytics.
+
+     Row 4 is a BBC Micro hit, which is in the response for real and which
+     the plugin must drop because ROMarr has no BBC Micro platform. Row 5
+     is a Neo Geo hit, dropped for the deliberate ambiguity documented in
+     platforms.py. Both are here so the skips are exercised rather than
+     assumed. -->
+<table class="table table-striped table-dark">
+  <thead>
+    <tr><th>Game</th><th></th><th>Name</th><th>Console</th><th>Downloads</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="d-block d-sm-none text-center"><a href="/roms/nes/contra-388" title="Contra Rom"><p><img width="208" src="/img/no-image-thumb.png" alt="Contra Rom"></p><p>Contra (USA) for NES</a></p></td>
+      <td class="d-none d-sm-table-cell align-middle"><a href="/roms/nes/contra-388" title="Contra Roms"><img width="208" src="/img/no-image-thumb.png" alt="Contra Rom"></a></td>
+      <td class="d-none d-sm-table-cell align-middle"><a href="/roms/nes/contra-388">Contra (USA)</a></td>
+      <td class="d-none d-sm-table-cell align-middle">NES</td>
+      <td class="d-none d-md-table-cell align-middle">127251</td>
+    </tr>
+    <tr>
+      <td class="d-block d-sm-none text-center"><a href="/roms/gb/contra-spirits-14639" title="Contra Spirits Rom"><p><img width="208" src="/img/no-image-thumb.png" alt="Contra Spirits Rom"></p><p>Contra Spirits (Japan) for GB</a></p></td>
+      <td class="d-none d-sm-table-cell align-middle"><a href="/roms/gb/contra-spirits-14639" title="Contra Spirits Roms"><img width="208" src="/img/no-image-thumb.png" alt="Contra Spirits Rom"></a></td>
+      <td class="d-none d-sm-table-cell align-middle"><a href="/roms/gb/contra-spirits-14639">Contra Spirits (Japan)</a></td>
+      <td class="d-none d-sm-table-cell align-middle">GB</td>
+      <td class="d-none d-md-table-cell align-middle">327</td>
+    </tr>
+    <tr>
+      <td class="d-block d-sm-none text-center"><a href="/roms/c64-preservation/contra-30631" title="Contra Rom"><p><img width="208" src="/img/no-image-thumb.png" alt="Contra Rom"></p><p>Contra (U) for C64 Preservation</a></p></td>
+      <td class="d-none d-sm-table-cell align-middle"><a href="/roms/c64-preservation/contra-30631" title="Contra Roms"><img width="208" src="/img/no-image-thumb.png" alt="Contra Rom"></a></td>
+      <td class="d-none d-sm-table-cell align-middle"><a href="/roms/c64-preservation/contra-30631">Contra (U)</a></td>
+      <td class="d-none d-sm-table-cell align-middle">C64 Preservation</td>
+      <td class="d-none d-md-table-cell align-middle">1043</td>
+    </tr>
+    <tr>
+      <td class="d-block d-sm-none text-center"><a href="/roms/bbc-micro/contraption-bootfile-ssd-18316" title="Contraption Rom"><p><img width="208" src="/img/no-image-thumb.png" alt="Contraption Rom"></p><p>Contraption for BBC Micro</a></p></td>
+      <td class="d-none d-sm-table-cell align-middle"><a href="/roms/bbc-micro/contraption-bootfile-ssd-18316" title="Contraption Roms"><img width="208" src="/img/no-image-thumb.png" alt="Contraption Rom"></a></td>
+      <td class="d-none d-sm-table-cell align-middle"><a href="/roms/bbc-micro/contraption-bootfile-ssd-18316">Contraption</a></td>
+      <td class="d-none d-sm-table-cell align-middle">BBC Micro</td>
+      <td class="d-none d-md-table-cell align-middle">88</td>
+    </tr>
+    <tr>
+      <td class="d-block d-sm-none text-center"><a href="/roms/neo-geo/contra-clone-9001" title="Contra Clone Rom"><p><img width="208" src="/img/no-image-thumb.png" alt="Contra Clone Rom"></p><p>Contra Clone for Neo Geo</a></p></td>
+      <td class="d-none d-sm-table-cell align-middle"><a href="/roms/neo-geo/contra-clone-9001" title="Contra Clone Roms"><img width="208" src="/img/no-image-thumb.png" alt="Contra Clone Rom"></a></td>
+      <td class="d-none d-sm-table-cell align-middle"><a href="/roms/neo-geo/contra-clone-9001">Contra Clone</a></td>
+      <td class="d-none d-sm-table-cell align-middle">Neo Geo</td>
+      <td class="d-none d-md-table-cell align-middle">12</td>
+    </tr>
+  </tbody>
+</table>
+
+<nav aria-label="navigation">
+  <ul class="pagination pg-dark justify-content-end">
+    <li class='page-item disabled'><a class='page-link'>1</a></li>
+    <li class='page-item'><a class='page-link' href='/search?currentpage=2&amp;search_term_string=contra'>2</a></li>
+    <li class='page-item'><a class='page-link' href='/search?currentpage=2&amp;search_term_string=contra'>&gt;</a></li>
+  </ul>
+</nav>

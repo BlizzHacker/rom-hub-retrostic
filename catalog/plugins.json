@@ -1,0 +1,36 @@
+{
+  "catalog_version": "1",
+  "updated": "2026-08-12",
+  "plugins": [
+    {
+      "slug": "retrostic",
+      "name": "Retrostic",
+      "author": "MoveWeight",
+      "repository": "https://git.moveweight.com/BlizzHacker/romarr-plugin-retrostic",
+      "install": "https://git.moveweight.com/BlizzHacker/romarr-plugin-retrostic",
+      "download": "https://git.moveweight.com/BlizzHacker/romarr-plugin-retrostic/archive/v0.1.0.tar.gz",
+      "version": "0.1.0",
+      "ref": "v0.1.0",
+      "updated": "2026-08-12",
+      "rpp_version": "1",
+      "capabilities": ["search", "stream"],
+      "platforms": [
+        "3do", "arcade", "atari-st", "atari2600", "atari5200", "atari7800",
+        "c64", "dc", "famicom", "gamegear", "gb", "gba", "gbc",
+        "genesis-slash-megadrive", "jaguar", "lynx", "n64", "nds",
+        "neo-geo-pocket", "nes", "ngc", "philips-cd-i", "ps2", "ps3", "psp",
+        "psx", "saturn", "sega32", "sharp-x68000", "sms", "snes",
+        "turbografx16--1", "virtualboy", "wii", "wonderswan",
+        "wonderswan-color", "zxs"
+      ],
+      "network": ["retrostic.com", "www.retrostic.com"],
+      "status": "caveat",
+      "search_only": false,
+      "key_required": false,
+      "in_tree": false,
+      "description": "Searches Retrostic through the site's own public GET search endpoint and resolves a hit to Retrostic's hosted player page. Indexes metadata only; it does not download.",
+      "terms": "Retrostic hosts mixed game content. This provider indexes metadata the site publishes and links to pages the site presents to visitors. It grants no redistribution rights; operators are responsible for using it in accordance with applicable law and the source's terms.",
+      "comments": "No importer: the site's download control is a POST form carrying a per-render session token, which neither ctx.http nor the host downloader can submit, and the direct .zip URL embedded in the play page is deliberately not used. 43 of 44 consoles map to a ROMarr platform; bbc-micro (no ROMarr platform, 4,753 ROMs) and neo-geo (ambiguous between neogeoaes and neogeomvs, 357) are counted and skipped rather than guessed."
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+[plugin]
+slug        = "retrostic"
+name        = "Retrostic"
+version     = "0.1.0"
+rpp_version = "1"
+license     = "MIT"
+
+# No `importer`. Retrostic's download control is a POST form carrying a
+# per-render `session` token, and `ctx.http` has only `get()` -- so is the
+# host's own downloader, which streams GET. A capability that could never
+# run is worse than an absent one: it advertises a download path to the
+# operator and then refuses every time it is called. See README, "Why there
+# is no importer".
+[capabilities]
+search = "retrostic.search:Search"
+stream = "retrostic.stream:Stream"
+
+# Exactly what is used, and nothing else. `www.retrostic.com` serves every
+# page this plugin reads or returns; the bare apex is listed because it 301s
+# to www and a redirect is not followed for us -- an operator hand-testing a
+# bare-apex URL should get a clean 301 rather than a policy violation that
+# looks like a bug.
+#
+# Deliberately absent: `downloads.retrostic.com`. The play page embeds a
+# direct .zip URL on that host inside its emulator iframe, and declaring the
+# host is the first step of reaching into it. Not declaring it means the
+# allowlist itself refuses, rather than relying on nobody writing the code.
+[permissions]
+network  = ["retrostic.com", "www.retrostic.com"]
+romm_api = []
+
+[config]
+collection = { type = "str", default = "Retrostic" }
+# Each page is 30 results. The default stops at one page because a ROM Hub
+# search is interactive and a caller asking for 20 results should not cost
+# the site four requests.
+max_pages = { type = "int", default = 1 }
+# Seconds between paginated requests. Retrostic declares no Crawl-delay, so
+# this is our own restraint rather than a rule being followed.
+request_delay = { type = "float", default = 1.5 }
