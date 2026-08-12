@@ -35,6 +35,13 @@ collection = { type = "str", default = "Retrostic" }
 # search is interactive and a caller asking for 20 results should not cost
 # the site four requests.
 max_pages = { type = "int", default = 1 }
-# Seconds between paginated requests. Retrostic declares no Crawl-delay, so
-# this is our own restraint rather than a rule being followed.
-request_delay = { type = "float", default = 1.5 }
+# Milliseconds between paginated requests. Retrostic declares no
+# Crawl-delay, so this is our own restraint rather than a rule being
+# followed.
+#
+# Milliseconds, and named `_ms`, because RPP v1 config types are
+# `str | int | bool | list[str] | secret` -- there is no `float`, and a
+# manifest that declares one is rejected outright by `parse_manifest`
+# rather than degrading. An integer count of milliseconds says the same
+# thing in a type the host actually has.
+request_delay_ms = { type = "int", default = 1500 }

@@ -87,7 +87,7 @@ def test_a_short_page_stops_pagination(search_html):
     # though max_pages allows three.
     http = FakeHttp([(200, search_html)])
     Search(
-        PluginContext(config={"max_pages": 3, "request_delay": 0}, http=http)
+        PluginContext(config={"max_pages": 3, "request_delay_ms": 0}, http=http)
     ).search("contra", None, 100)
     assert len(http.urls) == 1
 
@@ -102,7 +102,7 @@ def test_a_full_page_is_followed(search_html, monkeypatch):
     full = f"<table>{rows}</table>"
     http = FakeHttp([(200, full), (200, "<table></table>")])
     Search(
-        PluginContext(config={"max_pages": 2, "request_delay": 0}, http=http)
+        PluginContext(config={"max_pages": 2, "request_delay_ms": 0}, http=http)
     ).search("game", None, 100)
     assert http.urls == [
         "https://www.retrostic.com/search?search_term_string=game",
@@ -142,9 +142,25 @@ def test_the_delay_has_a_floor_an_operator_cannot_configure_away(monkeypatch):
     )
     http = FakeHttp([(200, f"<table>{rows}</table>"), (200, "<table></table>")])
     Search(
-        PluginContext(config={"max_pages": 2, "request_delay": 0}, http=http)
+        PluginContext(config={"max_pages": 2, "request_delay_ms": 0}, http=http)
     ).search("game", None, 100)
     assert slept == [0.5]
+
+
+def test_an_operator_can_raise_the_delay_and_it_is_read_as_milliseconds(monkeypatch):
+    # The other half of the floor: the gap can be widened, and 3000 means
+    # three seconds rather than three thousand of them.
+    slept = []
+    monkeypatch.setattr("retrostic.search.time.sleep", lambda s: slept.append(s))
+    rows = "".join(
+        f'<tr><td><a href="/roms/nes/game-{i}">Game {i}</a></td><td>NES</td></tr>'
+        for i in range(PAGE_SIZE)
+    )
+    http = FakeHttp([(200, f"<table>{rows}</table>"), (200, "<table></table>")])
+    Search(
+        PluginContext(config={"max_pages": 2, "request_delay_ms": 3000}, http=http)
+    ).search("game", None, 100)
+    assert slept == [3.0]
 
 
 def test_no_delay_before_a_single_page_search(search_html, monkeypatch):
@@ -159,7 +175,7 @@ def test_no_delay_before_a_single_page_search(search_html, monkeypatch):
 def test_garbage_config_falls_back_instead_of_raising(search_html):
     http = FakeHttp([(200, search_html)])
     results = Search(
-        PluginContext(config={"max_pages": "lots", "request_delay": "soon"}, http=http)
+        PluginContext(config={"max_pages": "lots", "request_delay_ms": "soon"}, http=http)
     ).search("contra", None, 20)
     assert len(results) == 3
 

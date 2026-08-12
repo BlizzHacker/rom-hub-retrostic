@@ -109,9 +109,17 @@ rom-hub catalog refresh
 |---|---|---|
 | `collection` | `Retrostic` | RomM collection name for imported entries |
 | `max_pages` | `1` | Result pages per query, 30 hits each |
-| `request_delay` | `1.5` | Seconds between paginated requests, floor `0.5` |
+| `request_delay_ms` | `1500` | Milliseconds between paginated requests, floor `500` |
 
-`request_delay` has a floor an operator cannot configure away. Retrostic
+The delay is in **milliseconds**, and named `_ms`, because RPP v1's config
+types are `str | int | bool | list[str] | secret` — there is no `float`,
+and `parse_manifest` rejects a manifest that declares one rather than
+degrading. An integer count of milliseconds says the same thing in a type
+the host actually has. (Worth knowing if you are copying a sibling plugin's
+manifest: some of them declare `request_delay = { type = "float" }`, which
+does not load.)
+
+`request_delay_ms` has a floor an operator cannot configure away. Retrostic
 declares no `Crawl-delay`, so the gap is our own restraint rather than a rule
 being followed, and a configurable zero would quietly remove it.
 

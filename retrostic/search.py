@@ -31,11 +31,17 @@ from .platforms import platform_for
 #: for more pages once it has enough, instead of always paying for the cap.
 PAGE_SIZE = 30
 
-#: Floor on the configured delay. An operator can raise the gap between
-#: paginated requests but not remove it -- the value exists to be polite to
-#: a site that has not asked us for anything, and a configurable zero would
-#: quietly turn that off.
-MIN_DELAY = 0.5
+#: Floor on the configured delay, in milliseconds. An operator can raise the
+#: gap between paginated requests but not remove it -- the value exists to be
+#: polite to a site that has not asked us for anything, and a configurable
+#: zero would quietly turn that off.
+MIN_DELAY_MS = 500
+
+#: The default, matching `manifest.toml`. Milliseconds rather than seconds
+#: because RPP v1 has no `float` config type -- a manifest declaring one is
+#: rejected by `parse_manifest`, so a fractional-second knob has to be an
+#: integer count of something smaller.
+DEFAULT_DELAY_MS = 1500
 
 
 def _words(value: str) -> list[str]:
@@ -56,9 +62,12 @@ class Search(SearchProvider):
         except (TypeError, ValueError):
             max_pages = 1
         try:
-            delay = max(MIN_DELAY, float(config.get("request_delay", 1.5)))
+            delay_ms = max(
+                MIN_DELAY_MS, int(config.get("request_delay_ms", DEFAULT_DELAY_MS))
+            )
         except (TypeError, ValueError):
-            delay = 1.5
+            delay_ms = DEFAULT_DELAY_MS
+        delay = delay_ms / 1000.0
 
         results: list[SearchResult] = []
         seen: set[str] = set()
