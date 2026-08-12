@@ -132,9 +132,16 @@ request is not varied, because that is where routing around a refusal starts.
 ROM_HUB_SRC=/opt/rom-hub/src PYTHONPATH=/opt/romarr pytest tests/ -q
 ```
 
-100 passing. `PYTHONPATH` to ROMarr is what makes the platform-slug checks run
+109 passing. `PYTHONPATH` to ROMarr is what makes the platform-slug checks run
 rather than skip; without it the suite still passes but the load-bearing test
 is skipped, which is the one thing here worth not skipping.
+
+`tests/test_manifest.py` parses `manifest.toml` with ROM Hub's own
+`load_manifest` rather than by inspection. Nothing else in the suite touches
+the manifest — every provider test builds a `PluginContext` directly — so
+before that file existed a manifest the host flatly refused still left all
+100 tests green, which is exactly how `request_delay = { type = "float" }`
+shipped.
 
 ## Terms
 

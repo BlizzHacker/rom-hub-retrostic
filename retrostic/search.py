@@ -67,6 +67,11 @@ class Search(SearchProvider):
             )
         except (TypeError, ValueError):
             delay_ms = DEFAULT_DELAY_MS
+        # `time.sleep` takes seconds; the config is milliseconds only because
+        # that is the type the manifest can declare. Converting once here is
+        # what keeps the rest of this method from having to remember which
+        # unit it is holding -- the two are a factor of 1000 apart and a
+        # mix-up either way is silent.
         delay = delay_ms / 1000.0
 
         results: list[SearchResult] = []

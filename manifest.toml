@@ -44,4 +44,8 @@ max_pages = { type = "int", default = 1 }
 # manifest that declares one is rejected outright by `parse_manifest`
 # rather than degrading. An integer count of milliseconds says the same
 # thing in a type the host actually has.
+#
+# `tests/test_manifest.py` runs this file through that same `parse_manifest`,
+# so an unsupported type fails the suite here rather than at somebody's
+# install -- which is how `float` survived in this file as long as it did.
 request_delay_ms = { type = "int", default = 1500 }
