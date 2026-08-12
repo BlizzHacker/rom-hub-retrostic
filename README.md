@@ -85,7 +85,7 @@ arcade as one platform, so the collapse loses nothing the library models.
 ## Install
 
 ```sh
-rom-hub plugin install https://git.moveweight.com/BlizzHacker/romarr-plugin-retrostic --ref v0.1.0
+rom-hub plugin install https://git.moveweight.com/BlizzHacker/rom-hub-retrostic --ref v0.1.0
 rom-hub search "contra" --platform nes
 rom-hub stream retrostic nes/contra-388
 ```
@@ -99,7 +99,7 @@ To list it in ROMarr's **Hub → Plugins** catalogue:
 
 ```sh
 rom-hub catalog add moveweight-retrostic \
-  https://git.moveweight.com/BlizzHacker/romarr-plugin-retrostic/raw/tag/v0.1.0/catalog/plugins.json
+  https://git.moveweight.com/BlizzHacker/rom-hub-retrostic/raw/tag/v0.1.0/catalog/plugins.json
 rom-hub catalog refresh
 ```
 
