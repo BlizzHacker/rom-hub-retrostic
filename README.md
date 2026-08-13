@@ -31,7 +31,7 @@ That is deliberate on two counts. Mirroring 83,797 pages to answer one query
 would be indefensible, and it is also impossible: `roms1.xml` alone is 4.9 MB
 and `ctx.http` caps a response at 4 MiB.
 
-## Why there is no importer
+## Why the standalone plugin has no importer
 
 Retrostic's download control is a form, not a link:
 
@@ -43,9 +43,17 @@ Retrostic's download control is a form, not a link:
 </form>
 ```
 
-POST, with a `session` value minted per page render. Neither half of ROM Hub
-can submit it: `ctx.http` exposes only `get()`, and the host's own downloader
-streams `GET` (`rom_hub/importer.py`).
+POST, with a `session` value minted per page render. The standalone ROM Hub
+path cannot submit it: `ctx.http` exposes only `get()`, and the host's own
+downloader streams `GET` (`rom_hub/importer.py`).
+
+That is not the end of the workflow. ROMarr Capture has a Retrostic detail-page
+adapter for the operator's real browser session. It can read the rendered form
+and is the correct home for an assisted POST/download handoff. The current
+capture endpoint indexes catalogue metadata only, and Retrostic often states
+the file size as `unknown`, so those rows remain preview-only until a real size
+is present. Search results expose `capture_supported` and
+`download_requires_browser` so clients can present that route explicitly.
 
 There **is** a way to make an importer work anyway. The play page embeds a
 direct `.zip` URL on `downloads.retrostic.com` inside its emulator iframe, and

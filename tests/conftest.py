@@ -20,6 +20,19 @@ for candidate in (
         sys.path.insert(0, candidate)
         break
 
+# Platform mapping tests use ROMarr's canonical registry. Keep this separate
+# from ROM Hub's SDK path: the two projects are sibling checkouts in
+# development and independent installs in production.
+for candidate in (
+    os.environ.get("ROMARR_SRC"),
+    "/opt/romarr",
+    str(ROOT.parent / "romarr-work"),
+    str(ROOT.parent / "romarr"),
+):
+    if candidate and Path(candidate, "romarr").is_dir():
+        sys.path.insert(0, candidate)
+        break
+
 
 class FakeHttp:
     """Stands in for `ctx.http`, which is an RPC to the host in production.

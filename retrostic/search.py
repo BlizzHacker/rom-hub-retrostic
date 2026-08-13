@@ -118,6 +118,12 @@ class Search(SearchProvider):
                         # discovering it at `stream`/import time.
                         "playable": "true",
                         "downloadable": "false",
+                        # The standalone plugin cannot POST a per-render
+                        # session token. ROMarr Capture can read the rendered
+                        # page in the operator's signed-in browser, so keep
+                        # that supported handoff visible to search consumers.
+                        "capture_supported": "true",
+                        "download_requires_browser": "true",
                     },
                 ))
                 if len(results) >= limit:

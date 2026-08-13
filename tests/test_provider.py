@@ -40,6 +40,8 @@ def test_search_carries_region_and_ids_without_claiming_a_size(search_html):
     assert first.extra["region"] == "USA"
     assert first.extra["retrostic_id"] == "388"
     assert first.extra["downloadable"] == "false"
+    assert first.extra["capture_supported"] == "true"
+    assert first.extra["download_requires_browser"] == "true"
     # Retrostic prints "unknown" for most file sizes; None is the honest answer.
     assert first.size_bytes is None
 
